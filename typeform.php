@@ -11,7 +11,7 @@ $ch_response = curl_exec($ch);
 curl_close($ch);
 
 $reply = ":thumbsup: hello"
-
+echo $reply
 /*
 # Decode the JSON array sent back by isitup.org
 $response_array = json_decode($ch_response,true);
