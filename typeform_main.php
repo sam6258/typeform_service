@@ -32,6 +32,7 @@ curl_close($ch);
 # Decode the JSON and place it into an array
 $array_1 = json_decode($ch_response, true);
 $total = $array_1["stats"]["responses"]["completed"];
+$user_found = false;
 
 $option_1  = strtok($text, " ");
 $option_2 = strtok(" ");
@@ -41,19 +42,25 @@ if (strtolower($option_1) == "search")
 {
 	for ($i=0; $i < $total ; $i++) 
 	{ 
-		if (strtolower($option_2) == $array_1["responses"][$i]["answers"]["textfield_27896188"] && strtolower($option_2) == $array_1["responses"][$i]["answers"]["textfield_27896194"]) 
+		if (strtolower($option_2) == strtolower($array_1["responses"][$i]["answers"]["textfield_27896188"]) && strtolower($option_3) == strtolower($array_1["responses"][$i]["answers"]["textfield_27896194"])) 
 		{
-			$reply = "Found em"
+			$user_found = true;
+			$reply = "Found em";
 		}
 	}
+	if ($user_found == false)
+	{
+		$reply = "Registrant not found";
+	}
+
 }
 elseif (strtolower($option_1) == "all") 
 {
-	$reply = "You wrote all"
+	$reply = "You wrote all";
 } 
 else
 {
-	$reply = "help goes here"
+	$reply = "help goes here";
 }
 
 /*
