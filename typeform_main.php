@@ -31,19 +31,32 @@ $ch_response = curl_exec($ch);
 curl_close($ch);
 # Decode the JSON and place it into an array
 $array_1 = json_decode($ch_response, true);
+$total = $array_1["stats"]["responses"]["completed"];
 
-$option_1  =strtok($text, " ");
+$option_1  = strtok($text, " ");
 $option_2 = strtok(" ");
 $option_3 = strtok(" ");
 
+if (strtolower($option_1) == "search")
+{
+	for ($i=0; $i < $total ; $i++) 
+	{ 
+		if (strtolower($option_2) == $array_1["responses"][$i]["answers"]["textfield_27896188"] && strtolower($option_2) == $array_1["responses"][$i]["answers"]["textfield_27896194"]) 
+		{
+			$reply = "Found em"
+		}
+	}
+}
+elseif (strtolower($option_1) == "all") 
+{
+	$reply = "You wrote all"
+} 
+else
+{
+	$reply = "help goes here"
+}
 
-
-
-
-
-
-
-$total = $array_1["stats"]["responses"]["completed"];
+/*
 $reply = "";
 $reply .= $option_1 . $option_2 . $option_3 . "\n";
 
@@ -51,5 +64,6 @@ for ($i=0; $i < $total ; $i++)
 { 
 	$reply .= $array_1["responses"][$i]["answers"]["textfield_27896188"]. " " .$array_1["responses"][$i]["answers"]["textfield_27896194"]. "\n";
 }
+*/
 
 echo $reply;
